@@ -12,7 +12,7 @@ addpath('../../Data');
 plotyesno = 0;
 saveyesno = 1;
 scale = 0:0.01:20;
-scale = 1;
+% scale = 1;
 
 % Given parameter values
 startval = setvalsMinMod();
@@ -27,7 +27,7 @@ P3 = startval(6);
 
 param_values = [gamma h n P1 P2 P3]';
 
-best_res = 1.5067;
+best_res = 1.5016;
 
 % String of fixed parameters
 fixed_param = {'gamma', 'h', 'n', 'P1', 'P2', 'P3', 'all'};
@@ -39,7 +39,7 @@ index = find(scale == 1);
 estimates = zeros(length(scale), length(param_values) - 1);
 res = zeros(length(scale), 1);
 
-for i = length(fixed_param)%1:length(fixed_param) - 1
+for i = 1:length(fixed_param) - 1
 
     field = fixed_param{i};
 

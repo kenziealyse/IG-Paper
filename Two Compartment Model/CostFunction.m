@@ -14,6 +14,14 @@ function res = CostFunction(G, I, ...
 
     res = glucose_resid + blood_insulin_resid;
 
+    RSS = sum((I - insulin_measurements).^2) + sum((G - glucose_measurements).^2);
+    TSS = sum((I - mean(insulin_measurements)).^2) + sum((G - mean(glucose_measurements)).^2);
+    Rsquared = 1 - (RSS/TSS);
+    datapoints = 2*length(insulin_measurements);
+    independentvars = 7;
+    AdjustedRSquared = 1 - ((1-Rsquared)*(datapoints - 1)/(datapoints - independentvars - 1))
+
+
      if res < 0 
         disp(G)
         scale;

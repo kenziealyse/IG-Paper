@@ -51,12 +51,10 @@ glucagon_data = [10.9 5.9 2.6 1.2 1.1 1.8 6.5 32.7 35.0 36.2 32.0;
 glucagon_numbers = [9 11 12 15 16 17 18];
 
 % Specify the folder name
-foldername = 'Pig Data';
-
 % Specify the filename for the .mat file
-glucose_filename = fullfile(foldername, 'all_pig_glucose_data.mat');
-insulin_filename = fullfile(foldername, 'all_pig_insulin_data.mat');
-glucagon_filename = fullfile(foldername, 'all_pig_glucagon_data.mat');
+glucose_filename = 'all_pig_glucose_data.mat';
+insulin_filename = 'all_pig_insulin_data.mat';
+glucagon_filename = 'all_pig_glucagon_data.mat';
 
 
 % Save the matrix to the .mat file

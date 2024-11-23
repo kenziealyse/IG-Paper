@@ -65,8 +65,11 @@ GL = Y(:,4);
 f = figure('Position', get(0, 'Screensize'));
 f.Position(4) = 600;
 
+% Adjust figure position and size
+set(gcf, 'Position', [100, 100, 800, 800]);
+
 % Plot Insulin
-subplot(1,3,1)
+subplot(2,2,1)
 plot(insulin_time, lower_insulin, 'Color', [.7 .7 .7])
 hold on
 plot(insulin_time, upper_insulin, 'Color', [.7 .7 .7])
@@ -83,7 +86,7 @@ xlabel('Time, minutes', 'FontSize', 17)
 ylabel('Insulin, \mug/L', 'FontSize', 17)
 
 % Plot Glucose
-subplot(1,3,2)
+subplot(2, 2, 2);
 plot(glucose_time, lower_glucose, 'Color', [.7 .7 .7])
 hold on
 plot(glucose_time, upper_glucose, 'Color', [.7 .7 .7])
@@ -100,7 +103,7 @@ xlabel('Time, minutes', 'FontSize', 17)
 ylabel('Glucose, mmol/L', 'FontSize', 17)
 
 % Plot Glucagon
-subplot(1,3,3)
+subplot(2, 2, 3.5);
 plot(glucagon_time, lower_glucagon, 'Color', [.7 .7 .7])
 hold on
 plot(glucagon_time, upper_glucagon, 'Color', [.7 .7 .7])
@@ -117,10 +120,13 @@ xlabel('Time, minutes', 'FontSize', 17)
 ylabel('Glucagon, pmol/L', 'FontSize', 17)
 legend('', '', '95% C.I.', 'Model Simulation','Data', 'FontSize', 17)
 
+
+
+
 % Save the figure as pdf
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-figurename = 'IGGLSS_best_fit_penalty.pdf';
+figurename = 'IGGLSS_best_fit_POSTER.pdf';
 saveas(gcf, figurename); % Save Figure in Folder
             

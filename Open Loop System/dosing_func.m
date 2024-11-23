@@ -15,7 +15,7 @@ glucose_data = fitting_data.glucose;
     if  t == 0 || t > 1
         dose = 0;
     else
-        dose = glucose_data(2) - glucose_data(1) + 1;
+        dose = glucose_data(2) - glucose_data(1) + 1
     end
 
 %     if  t < 5 || t > 6

@@ -79,8 +79,9 @@ for i = 1:length(halflife)
     xlabel('Time, minutes', 'FontSize', 17)
     xlim([0 180])
     xticks(0:20:180)
-    Legend{i} = ['Half life = ', num2str(halflife(i)), ' minutes'];
+    Legend{i} = ['Insulin Half-life = ', num2str(halflife(i)), ' minutes'];
     legend(Legend, 'FontSize', 12)
+    title('Insulin', 'FontSize', 17)
     hold on
     
     subplot(1,3,2)
@@ -89,6 +90,7 @@ for i = 1:length(halflife)
     xlabel('Time, minutes', 'FontSize', 17)
     xlim([0 180])
     xticks(0:20:180)
+    title('Glucose', 'FontSize', 17)
     hold on
     
     subplot(1,3,3)
@@ -97,6 +99,7 @@ for i = 1:length(halflife)
     xlabel('Time, minutes', 'FontSize', 17)
     xlim([0 180])
     xticks(0:20:180)
+    title('Glucagon', 'FontSize', 17)
     hold on
     
     

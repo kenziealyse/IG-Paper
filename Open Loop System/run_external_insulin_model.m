@@ -7,9 +7,9 @@ clc
 addpath('../Data');
 
 %% Things to change
-delta = 0.2;
+delta = 2;
 saveyesno = 1;
-testcase = 'randomnoise';   % 'randomnoise'
+testcase = 'timeshift';   % 'randomnoise'
                              % 'peakdecrease'
                              % 'timeshift'
                              % 'timeandpeak'
@@ -137,7 +137,7 @@ for i = 1:length(delta)
             
             % Plot
             f = figure();
-            f.Position(4) = 600;
+            f.Position(4) = 400;
             f.Position(3) = 1100;
             subplot(1,3,1)
             plot(tspan, Adjustedvector, 'Color', [.6 .6 .6], 'LineWidth', 1.5)
@@ -145,6 +145,7 @@ for i = 1:length(delta)
             xlabel('Time, minutes', 'FontSize', 17)
             xlim([0 180])
             xticks(0:20:180)
+  
             hold on
             
             subplot(1,3,2)
@@ -174,19 +175,20 @@ for i = 1:length(delta)
             subplot(1,3,1)
             plot(tspan, I, 'Color', 'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Insulin', 'FontSize', 20)
+            legend('Reduced Insulin Profile', 'Original Insulin Profile', 'FontSize', 17, 'Location', 'best')
             subplot(1,3,2)
             plot(tspan, G, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Glucose', 'FontSize', 20)
             subplot(1,3,3)
             plot(tspan, GL, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Glucagon', 'FontSize', 20)
-            legend('Adjusted Data', 'Original Data', 'FontSize', 17)
+            
     
     
         case 'timeshift'
            
             interpfunc = @interpI3; 
-            Adjustedvector = tspan.*delta(i);
+            Adjustedvector = tspan;
     
             % Simulate calibration results
             [tspan,Y] = ode23s(@(t,Y) model(t,Y,param_values, @dosing_func, Adjustedvector, interpfunc), tspan, init_cond);
@@ -197,10 +199,12 @@ for i = 1:length(delta)
             
             % Plot
             f = figure();
-            f.Position(4) = 600;
+            f.Position(4) = 400;
             f.Position(3) = 1100;
             subplot(1,3,1)
-            plot(Adjustedvector, I, 'Color', [.6 .6 .6], 'LineWidth', 1.3)
+            I_adjusted = zeros(length(I),1);
+            I_adjusted(length(0:0.1:20) + 1:end) = I(1:length(I) - length(0:0.1:20));
+            plot(tspan, I_adjusted, 'Color', [.6 .6 .6], 'LineWidth', 1.3)
             ylabel('Insulin, \mug/L', 'FontSize', 17)
             xlabel('Time, minutes', 'FontSize', 17)
             xlim([0 180])
@@ -234,13 +238,13 @@ for i = 1:length(delta)
             subplot(1,3,1)
             plot(tspan, I, 'Color', 'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Insulin', 'FontSize', 20)
+            legend('Delayed Insulin Profile', 'Original Insulin Profile', 'FontSize', 17, 'Location', 'best')     
             subplot(1,3,2)
             plot(tspan, G, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Glucose', 'FontSize', 20)
             subplot(1,3,3)
             plot(tspan, GL, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
-            title('Glucagon', 'FontSize', 20)
-            legend('Adjusted Data', 'Original Data', 'FontSize', 17)   
+            title('Glucagon', 'FontSize', 20)  
 
     case 'timeandpeak'
 
@@ -259,7 +263,9 @@ for i = 1:length(delta)
             f.Position(4) = 600;
             f.Position(3) = 1100;
             subplot(1,3,1)
-            plot(tspan.*Adjustedvector(1), I.*Adjustedvector(2), 'Color', [.6 .6 .6], 'LineWidth', 1.3)
+            I_adjusted = zeros(length(I),1);
+            I_adjusted(length(0:0.1:20) + 1:end) = I(1:length(I) - length(0:0.1:20));
+            plot(tspan, I_adjusted.*Adjustedvector(2), 'Color', [.6 .6 .6], 'LineWidth', 1.3)
             ylabel('Insulin, \mug/L', 'FontSize', 17)
             xlabel('Time, minutes', 'FontSize', 17)
             xlim([0 180])
@@ -293,13 +299,13 @@ for i = 1:length(delta)
             subplot(1,3,1)
             plot(tspan, I, 'Color', 'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Insulin', 'FontSize', 20)
+            legend('Delayed and Reduced \newline Insulin Profile', 'Original Insulin Profile', 'FontSize', 17, 'Location', 'best')
             subplot(1,3,2)
             plot(tspan, G, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
             title('Glucose', 'FontSize', 20)
             subplot(1,3,3)
             plot(tspan, GL, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
-            title('Glucagon', 'FontSize', 20)
-            legend('Adjusted Data', 'Original Data', 'FontSize', 17)   
+            title('Glucagon', 'FontSize', 20) 
     end
     
   

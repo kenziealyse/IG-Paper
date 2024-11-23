@@ -1,3 +1,4 @@
+% Clear the Workspace
 clear
 clc
 close all
@@ -95,9 +96,9 @@ parfor i = 1:num_of_samples
 
 end
 
-std_err_insulin = (std(insulin_all, 0, 1)./sqrt(num_of_samples))'
-std_err_glucose = (std(glucose_all, 0, 1)./sqrt(num_of_samples))'
-std_err_glucagon = (nanstd(glucagon_all, 0, 1)./sqrt(num_of_samples))'
+std_err_insulin = (std(insulin_all, 0, 1)./sqrt(num_of_samples))';
+std_err_glucose = (std(glucose_all, 0, 1)./sqrt(num_of_samples))';
+std_err_glucagon = (nanstd(glucagon_all, 0, 1)./sqrt(num_of_samples))';
 
 std_insulin = std(insulin_all)';
 std_glucose = std(glucose_all)';
@@ -136,16 +137,13 @@ glucagon_CI_data.lower = lower_glucagon;
 glucagon_CI_data.upper = upper_glucagon;
 
 
-% Specify the folder name
-foldername = 'Pig Data';
-
 % Specify the filename for the .mat file
-glucose_filename = fullfile(foldername, 'glucose_CI_data.mat');
-insulin_filename = fullfile(foldername, 'insulin_CI_data.mat');
-glucagon_filename = fullfile(foldername, 'glucagon_CI_data.mat');
-all_data_filename = fullfile(foldername, 'all_pig_data.mat');
-median_data_filename = fullfile(foldername, 'pig_data_median.mat');
-pig_time_data_filename = fullfile(foldername, 'pig_time_data.mat');
+glucose_filename = 'glucose_CI_data.mat';
+insulin_filename = 'insulin_CI_data.mat';
+glucagon_filename = 'glucagon_CI_data.mat';
+all_data_filename = 'all_pig_data.mat';
+median_data_filename = 'pig_data_median.mat';
+pig_time_data_filename = 'pig_time_data.mat';
 
 
 % Save the matrix to the .mat file

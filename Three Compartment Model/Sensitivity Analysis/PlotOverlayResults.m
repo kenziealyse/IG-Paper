@@ -101,8 +101,7 @@ n = startval(3);
 P1 = startval(4);
 P2 = startval(5);
 P3 = startval(6);
-mu = startval(7);
-param_values = [gamma h n P1 P2 P3 mu]';
+param_values = [gamma h n P1 P2 P3]';
 
 % Run simulation
 init_cond = [init_cond_insulin , init_cond_glucose, 0];

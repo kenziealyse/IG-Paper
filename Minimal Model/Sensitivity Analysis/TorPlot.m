@@ -78,5 +78,5 @@ xlabel('Cost Function Value', 'FontSize', 25)
 set(gcf, 'Units', 'Inches');
 pos = get(gcf, 'Position');
 set(gcf, 'PaperPositionMode', 'Auto', 'PaperUnits', 'Inches', 'PaperSize', [pos(3), pos(4)]);
-figurename = strcat('Minmod', num2str(pct_change), '.pdf');
+figurename = strcat('Minmod_tornado_', num2str(pct_change), '.pdf');
 saveas(gcf, figurename); % Save Figure in Folder
