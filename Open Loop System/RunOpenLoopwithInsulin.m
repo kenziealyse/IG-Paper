@@ -3,6 +3,9 @@ clc
 clear
 close all
 
+% Add data path
+addpath('../../Data');
+
 % Load and Save the Data
 [fitting_data, time_data] = load_fitting_data();
 

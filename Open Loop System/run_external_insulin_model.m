@@ -62,67 +62,6 @@ init_cond = [init_cond_glucose, init_cond_glucagon];
 for i = 1:length(delta)
     switch testcase
     
-        case 'randomnoise'
-            interpfunc = @interpI;
-            Adjustedvector = delta(i).* I.*randn(size(I));
-            Adjustedvector = I + Adjustedvector;
-    
-            % Simulate calibration results
-            [tspan,Y] = ode23s(@(t,Y) model(t,Y,param_values, @dosing_func, Adjustedvector, interpfunc), tspan, init_cond);
-    
-            % Relabel Compartments to Easily Keep Track
-            G = Y(:,1);
-            GL = Y(:,2);
-            
-            % Plot           
-            f = figure();
-            f.Position(4) = 600;
-            f.Position(3) = 1100;
-            subplot(1,3,1)
-            plot(tspan, Adjustedvector, 'Color',  [.6 .6 .6], 'LineWidth', 1.3)
-            ylabel('Insulin, \mug/L', 'FontSize', 17)
-            xlabel('Time, minutes', 'FontSize', 17)
-            xlim([0 180])
-            xticks(0:20:180)
-            hold on
-            
-            subplot(1,3,2)
-            plot(tspan, G, 'Color',  [.6 .6 .6], 'LineWidth', 1.5)
-            ylabel('Glucose, mmol/L', 'FontSize', 17)
-            xlabel('Time, minutes', 'FontSize', 17)
-            xlim([0 180])
-            xticks(0:20:180)
-            hold on
-            
-            subplot(1,3,3)
-            plot(tspan, GL, 'Color',  [.6 .6 .6], 'LineWidth', 1.5)
-            ylabel('Glucagon, pmol/L', 'FontSize', 17)
-            xlabel('Time, minutes', 'FontSize', 17)
-            xlim([0 180])
-            xticks(0:20:180)
-            hold on
-            
-            % Simulate calibration results
-            [tspan,Y] = ode23s(@(t,Y) model(t,Y,param_values, @dosing_func, I, interpfunc), tspan, init_cond);
-            
-            % Relabel Compartments to Easily Keep Track
-            G = Y(:,1);
-            GL = Y(:,2);
-            
-             % Plot
-            subplot(1,3,1)
-            plot(tspan, I, 'Color', 'k', 'LineWidth', 1.3, 'LineStyle', '--')
-            title('Insulin', 'FontSize', 20)
-            subplot(1,3,2)
-            plot(tspan, G, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
-            title('Glucose', 'FontSize', 20)
-            subplot(1,3,3)
-            plot(tspan, GL, 'Color',  'k', 'LineWidth', 1.3, 'LineStyle', '--')
-            title('Glucagon', 'FontSize', 20)
-            legend('Adjusted Data', 'Original Data', 'FontSize', 17) 
-    
-    
-    
         case 'peakdecrease'
     
             interpfunc = @interpI2;
@@ -251,6 +190,7 @@ for i = 1:length(delta)
             interpfunc = @interpI4; 
             Adjustedvector = [2 0.5];
             delta = Adjustedvector;
+
             % Simulate calibration results
             [tspan,Y] = ode23s(@(t,Y) model(t,Y,param_values, @dosing_func, Adjustedvector, interpfunc), tspan, init_cond);
     
