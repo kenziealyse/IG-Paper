@@ -5,7 +5,6 @@ close all
 startvals = setvalsMinMod();
 
 % Add data path
-addpath('../Minimal Model');
 addpath('../../Data');
 
 % Given parameter values
@@ -18,7 +17,7 @@ P3 = startvals(6);
 
 param_values = [gamma h n P1 P2 P3]';
 
-res1 = C(param_values, startvals)
+res1 = myres(param_values)
 
 
 % Simulate calibration results
@@ -42,7 +41,7 @@ upper_glucose = glucose_CI_data.glucose_CI_data.upper;
 % Initial Conditions
 init_cond = [init_cond_insulin , init_cond_glucose, 0];
 tspan_to_save = 0:.1:180;
-[t,Y] = ode23s(@(t,Y) MinModel_func(t, Y, param_values, @dosing_func, startvals), tspan_to_save, init_cond);
+[t,Y] = ode23s(@(t,Y) MinModel_func(t, Y, param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 I = Y(:,1);

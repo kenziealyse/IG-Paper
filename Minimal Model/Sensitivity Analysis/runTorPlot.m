@@ -4,11 +4,10 @@ clc
 close all
 
 % Add path
-addpath('../Minimal Model');
 addpath('../../Data');
 
 % Specify model
-func = @C;
+func = @myres;
 model = @MinModel_func;
 
 % Specify number of parameter sets to generate
@@ -35,5 +34,5 @@ pcts = [0.05 0.1 0.15 0.2];
 
 % Generate Tornado Plot
 for i = 1:length(pcts)
-    TorPlot(parameter_matrix, param_names, pcts(i), func, model);
+    TorPlot(parameter_matrix, param_names, pcts(i), func);
 end
