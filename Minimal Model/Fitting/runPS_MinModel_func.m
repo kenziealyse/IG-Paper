@@ -10,8 +10,11 @@ clc
 
 tic
 
+% Change path
+addpath('/Users/kenzdalt/Documents/MATLAB/IG Paper/Data')
+
 % Parameters to Change 
-num_of_sets = 5000;
+num_of_sets = 5;
 gamma_vals = 2;
 
 % Set Scales
@@ -23,20 +26,15 @@ P2_scale = 5;
 P3_scale = 5;
 mu_scale = 2;
 
-
-% Set Model
-model = @MinModel_func;
-
 % Set Parameter Values
 num_of_params = 7;
 scales = [gamma_scale, h_scale, n_scale, P1_scale, P2_scale, P3_scale, mu_scale];
 
-filename_strings = 'Fit_Data_Information_both_fit_MinModel2.mat';
+filename = 'MinModPSRestuls.mat';
 
 param_names = {'gamma'; 'h'; 'n'; 'P1'; 'P2'; 'P3'; '\mu'};
 
 % Run Min_Model_Param_Search_fits
-MinModel_Penalty_Min_Model_Param_Search_fits(gamma_vals, ...
-    filename_strings, num_of_params, num_of_sets, scales, param_names, model);
+PS_MinModel(filename, num_of_params, num_of_sets, scales, param_names);
 
 end_time = toc/60
