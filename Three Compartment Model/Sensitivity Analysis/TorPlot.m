@@ -1,4 +1,4 @@
-function [low,high] = TorPlot(data, names, sensitivity, fh, model)
+function [low,high] = TorPlot(data, names, sensitivity, fh)
 % TorPlot  A function for generating tornado plots. This program calculates
 % a baseline value using the function handle provided, or defaulting to 
 % summing the vector 'data'. Each element of 'data' is
@@ -35,12 +35,12 @@ high = zeros(1,length(names));
         Objective_high = data;
         Objective_low(i) = Objective_low(i)*(1 - sensitivity);
         Objective_high(i) = Objective_high(i)*(1 + sensitivity);
-        Objective_low_sum(i) = fh(Objective_low, model);
-        Objective_high_sum(i) = fh(Objective_high, model);
+        Objective_low_sum(i) = fh(Objective_low);
+        Objective_high_sum(i) = fh(Objective_high);
         low(i) = Objective_low_sum(i);
         high(i) = Objective_high_sum(i); 
         % The base value is where the y axis is centered
-        Objective_base_value = fh(data, model);
+        Objective_base_value = fh(data);
     end
 
 % Sort the values based on the lower change

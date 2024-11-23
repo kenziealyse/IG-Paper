@@ -4,7 +4,6 @@ clc
 close all
 
 % Add path
-addpath('../Model');
 addpath('../../Data');
 
 % Set Best Fit Parameter Values
@@ -15,7 +14,7 @@ k2 = startval(2);
 k3 = startval(3);
 k4 = startval(4);
 delta1 = startval(5);
-delta2 = 0.01%startval(6);
+delta2 = 0.01; % Change this to test different disease states
 delta3 = startval(7);
 delta4 =  startval(8);
 n = startval(9);
@@ -24,7 +23,6 @@ z = startval(11);
 h = startval(12);
 
 param_values = [k1 k2 k3 k4 delta1 delta2 delta3 delta4 n p z h]';
-best_residal = C2(param_values, startval)
 
 % Load and Save the Data
 [fitting_data, time_data] = load_fitting_data();
@@ -53,7 +51,7 @@ init_cond = [1, init_cond_insulin , init_cond_glucose, init_cond_glucagon];
 tspan_to_save = 0:.1:180;
 
 % Run Simulation With Best Fit Parameters
-[T,Y_disease] = ode23s(@(t,Y) IGGlSS_func1_noSS(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
+[T,Y_disease] = ode23s(@(t,Y) ThreeCompartmentModel(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 B_disease = Y_disease(:,1);
@@ -65,7 +63,7 @@ GL_disease = Y_disease(:,4);
 delta2 = startval(6);
 param_values = [k1 k2 k3 k4 delta1 delta2 delta3 delta4 n p z h]';
 
-[~,Y_healthy] = ode23s(@(t,Y) IGGlSS_func1_noSS(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
+[~,Y_healthy] = ode23s(@(t,Y) ThreeCompartmentModel(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 B_healthy = Y_healthy(:,1);

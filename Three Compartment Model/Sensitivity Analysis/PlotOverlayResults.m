@@ -4,7 +4,6 @@ clc
 close all
 
 % Add path
-addpath('../Model');
 addpath('../../Data');
 
 % Set Best Fit Parameter Values
@@ -52,7 +51,7 @@ init_cond = [1, init_cond_insulin , init_cond_glucose, init_cond_glucagon];
 tspan_to_save = 0:.1:180;
 
 % Run Simulation With Best Fit Parameters
-[T,Y] = ode23s(@(t,Y) IGGlSS_func1_noSS(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
+[T,Y] = ode23s(@(t,Y) ThreeCompartmentModel(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 B = Y(:,1);
@@ -90,7 +89,6 @@ ylabel('Glucose, mmol/L', 'FontSize', 17)
 clearvars t Y param_values startval
 % Add needed paths
 addpath('../../Minimal Model/Sensitivity Analysis');
-addpath('../../Minimal Model/Minimal Model');
 
 % Set parameter values
 startval = setvalsMinMod();
@@ -106,7 +104,7 @@ param_values = [gamma h n P1 P2 P3]';
 % Run simulation
 init_cond = [init_cond_insulin , init_cond_glucose, 0];
 tspan_to_save = 0:.1:180;
-[t,Y] = ode23s(@(t,Y) MinModel_func(t, Y, param_values, @dosing_func, startval), tspan_to_save, init_cond);
+[t,Y] = ode23s(@(t,Y) MinModel_func(t, Y, param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 I = Y(:,1);

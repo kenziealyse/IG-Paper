@@ -4,7 +4,6 @@ clc
 close all
 
 % Add path
-addpath('../Model');
 addpath('../../Data');
 
 % Specifiy if you want to plot or save and the scale for parameters 

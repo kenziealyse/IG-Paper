@@ -4,7 +4,6 @@ clc
 close all
 
 % Add path
-addpath('../Model');
 addpath('../../Data');
 
 % Set Best Fit Parameter Values
@@ -24,7 +23,7 @@ z = startval(11);
 h = startval(12);
 
 param_values = [k1 k2 k3 k4 delta1 delta2 delta3 delta4 n p z h]';
-best_residal = C2(param_values, startval)
+best_residal = myres(param_values)
 
 % Load and Save the Data
 [fitting_data, time_data] = load_fitting_data();
@@ -53,7 +52,7 @@ init_cond = [1, init_cond_insulin , init_cond_glucose, init_cond_glucagon];
 tspan_to_save = 0:.1:180;
 
 % Run Simulation With Best Fit Parameters
-[T,Y] = ode23s(@(t,Y) IGGlSS_func1_noSS(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
+[T,Y] = ode23s(@(t,Y) ThreeCompartmentModel(t,Y,param_values, @dosing_func), tspan_to_save, init_cond);
 
 % Relabel Compartments to Easily Keep Track
 B = Y(:,1);

@@ -4,12 +4,11 @@ clc
 close all
 
 % Add path
-addpath('../Model');
 addpath('../../Data');
 
 % Specify model
-func = @C2;
-model = @IGGlSS_func1_noSS;
+func = @myres;
+model = @ThreeCompartmentModel;
 
 % Specify number of parameter sets to generate
 num_sets = 12;
@@ -41,5 +40,5 @@ pcts = [0.05, 0.1, 0.15, 0.2];
 
 % Generate Tornado Plot
 for i = 1:length(pcts)
-    TorPlot(parameter_matrix, param_names, pcts(i), func, model);
+    TorPlot(parameter_matrix, param_names, pcts(i), func);
 end
