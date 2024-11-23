@@ -8,7 +8,7 @@ Minimal Model Folder README:
 
 ***********************************************************************
 
-Folder: Fitting 
+Folder: Parameter Search
 
 Folder for fitting doing a parameters search to fit the min model against 
 insulin and glucose data.
@@ -29,7 +29,6 @@ runPS_MinModel_func.m: File to run the parameter search fits (the file you
 want to run)
 
 randomize_param_values.m: Function to randomize parameters
-
 
 
 ***********************************************************************

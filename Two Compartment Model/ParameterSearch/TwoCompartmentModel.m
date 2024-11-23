@@ -7,7 +7,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function DyDt = IGS_func(t, Y, params, U)
+function DyDt = TwoCompartmentModel(t, Y, params, U)
 
 % Paramter Values
 k1 = params(1);

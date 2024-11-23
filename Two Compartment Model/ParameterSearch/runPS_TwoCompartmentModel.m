@@ -5,14 +5,16 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+% Clear the workspace
+clc
+clear
+close all
+
+
 tic
 
 % Parameters to Change 
-num_of_sets = 100;
-% gamma_vals = [0, 1/2, 1];
-gamma_vals = [0];    % 0: to fit insulin    
-                     % 1: to fit glucose
-                     % 2: to fit both
+num_of_sets = 10;
 
 % Set Scales
 k1_scale = 600;
@@ -31,11 +33,11 @@ param_names = {'k_1', 'k_2', 'k_3', 'delta_2', 'delta_3', 'delta_4', 'n'};
 
 % filename_strings = {'Fit_Data_Information_both_fit_IGS_delta3_only.mat'};
 
-filename_strings = 'Fit_Data_Information_insulin_fit_IGS.mat';
+filename = 'PS_Results.mat';
 
 
 % Run Min_Model_Param_Search_fits
-Fit_Data_Information1 = IGS_Penalty_Min_Model_Param_Search_fits(gamma_vals, filename_strings, num_of_params, ...
-    num_of_sets, scales, param_names, @IGS_func);
+TwoCompartmentPS(filename, num_of_params, ...
+    num_of_sets, scales, param_names);
 
 end_time = toc/60
