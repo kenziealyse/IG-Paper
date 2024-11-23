@@ -7,18 +7,18 @@ close all
 startval = setvals();
 pig_number = 5;
 				
-k1 = 0.164453828041447;%startval(1);
-k2 = 9.89052666861253;%startval(2);
-k3 = 0.00300866908519650;%startval(3);
-k4 = 21.8897771044400;%startval(4);
-delta1 = 0.132619270447985;%startval(5);
-delta2 = 0.230895805308295;%startval(6);
-delta3 = 0.000970479682472069;%startval(7);
-delta4 =  0.339148388682595;%startval(8);
-n = 4.73110173897287;%startval(9);
-p = 99.8834163446081;%startval(10);
-z = 1.71558788848804;%startval(11);
-h = 3.19835480818333;%startval(12);
+k1 = startval(1);
+k2 = startval(2);
+k3 = startval(3);
+k4 = startval(4);
+delta1 = startval(5);
+delta2 = startval(6);
+delta3 = startval(7);
+delta4 =  startval(8);
+n = startval(9);
+p = startval(10);
+z = startval(11);
+h = startval(12);
 
 init_guess = [k1, k2, k3, k4, delta1, delta2, delta3, delta4, n, p, z, h];
 

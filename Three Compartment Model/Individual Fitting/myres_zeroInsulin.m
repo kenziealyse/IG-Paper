@@ -41,7 +41,7 @@ function res = myres_zeroInsulin(param_values, pig_number)
     G = Y(:,3);
     GL = Y(:,4);
 
-    index = find(insulin_data == 0)
+    index = find(insulin_data == 0);
 
     insulin_data(index) = [];
     insulin_time(index) = [];
@@ -63,12 +63,6 @@ function res = myres_zeroInsulin(param_values, pig_number)
     G = real(G);
     I = real(I);
     GL = real(GL);
-
-%     for i = 1:length(insulin_data)
-%        if insulin_data(i) < 10e-5
-%            insulin_data(i) = 10e-5;
-%        end
-%    end
 
     % Calculate individual residuals
     blood_insulin_resid = sum(((I - insulin_data)./(mean(insulin_data))).^2);
